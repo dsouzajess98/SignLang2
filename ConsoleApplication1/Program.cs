@@ -40,19 +40,19 @@ namespace CSPredictionSample
                 Mat temp = new Mat(image, r);
 
                 count++;
-                if(count == 50)
+                if(count == 200)
                 {
 
                     new Thread(() => {
                         MakePredictionRequest(temp).Wait();
-                        Cv2.PutText(image, res, new Point(10, 10), HersheyFonts.HersheyPlain, 3, Scalar.Black);
+                        Cv2.PutText(image, res, new Point(10, 10), HersheyFonts.HersheyPlain, 3, Scalar.Yellow);
 
 
                     }).Start();
                     count = 0;
                 }
-                Console.WriteLine(count);
-                Cv2.PutText(image, res, new Point(30, 30), HersheyFonts.HersheyPlain, 3, Scalar.White);
+              Console.WriteLine(count);
+                Cv2.PutText(image, res, new Point(30, 30), HersheyFonts.HersheyPlain, 3, Scalar.Yellow);
                 Cv2.ImShow("Frame1", image);
                 Cv2.ImShow("Frame2", temp);
 
