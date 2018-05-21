@@ -12,7 +12,7 @@ namespace CSPredictionSample
 {
     static class Program
     {
-        static string res = "hello";
+        static string res = " ";
         static void Main()
         {
 
@@ -45,14 +45,25 @@ namespace CSPredictionSample
 
                     new Thread(() => {
                         MakePredictionRequest(temp).Wait();
-                        Cv2.PutText(image, res, new Point(10, 10), HersheyFonts.HersheyPlain, 3, Scalar.Yellow);
+                     //   Cv2.PutText(image, res, new Point(50, 100), HersheyFonts.HersheyPlain, 2, Scalar.Yellow);
 
 
                     }).Start();
                     count = 0;
                 }
               Console.WriteLine(count);
-                Cv2.PutText(image, res, new Point(30, 30), HersheyFonts.HersheyPlain, 3, Scalar.Yellow);
+                MatOfByte3 mat3 = new MatOfByte3(image); // cv::Mat_<cv::Vec3b>
+                var indexer = mat3.GetIndexer();
+                for (int x = 100; x < 250; x++)
+                {
+                    for (int y = 40; y < 90; y++)
+                    {
+                        Vec3b color = new Vec3b(161,101,0);
+
+                        indexer[y,x] = color;
+                    }
+                }
+                Cv2.PutText(image, res, new Point(150, 80), HersheyFonts.HersheySimplex, 2, Scalar.White);
                 Cv2.ImShow("Frame1", image);
                 Cv2.ImShow("Frame2", temp);
 
